@@ -8,6 +8,7 @@ __all__ = ('platform', 'reify', 'deprecated')
 from os import environ
 from os import path
 from sys import platform as _sys_platform
+import subprocess
 
 
 class Platform:
@@ -61,6 +62,8 @@ class Platform:
             return 'macosx'
         elif _sys_platform[:5] == 'linux':
             return 'linux'
+        elif subprocess.check_output(['uname', '-o'] == b'Android\n'):
+            return 'android'
         return 'unknown'
 
 
